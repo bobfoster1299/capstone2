@@ -3,6 +3,11 @@
   become: yes
   tasks: 
 
+  - name: install sshpass
+    yum:
+      name: sshpass
+      state: latest
+
   - name: install docker
     yum:
       name: docker
