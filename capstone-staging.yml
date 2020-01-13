@@ -1,0 +1,61 @@
+Description:
+  Robert Foster
+  Udacity / Capstone
+  Servers
+
+Parameters:
+  EnvironmentName:
+    Description: An environment name that will be prefixed to resources
+    Type: String
+
+Resources:
+  EC2Staging: 
+    Type: AWS::EC2::Instance
+    Properties: 
+      ImageId: "ami-01ed306a12b7d1c96"
+      InstanceType: "t2.micro"
+      Tags:
+        - Key: Name
+          Value : !Sub ${EnvironmentName}-staging
+      KeyName: "capstone-keypair"
+      NetworkInterfaces: 
+        - AssociatePublicIpAddress: "true"
+          DeviceIndex: "0"
+          GroupSet: 
+          - Ref: StagingSecGroup
+          SubnetId: 
+            Fn::ImportValue: !Sub ${EnvironmentName}-publicsubnet1-id
+
+  StagingSecGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties: 
+      GroupDescription: Allow access to staging
+      VpcId:
+        Fn::ImportValue:
+          !Sub ${EnvironmentName}-vpc-id
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 146.199.83.97/32
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 157.140.121.86/32
+        - IpProtocol: -1
+          FromPort: -1
+          ToPort: -1
+          CidrIp: 10.4.0.0/24
+        - IpProtocol: tcp
+          FromPort: 3000
+          ToPort: 3000
+          CidrIp: 146.199.83.97/32
+        - IpProtocol: tcp
+          FromPort: 3000
+          ToPort: 3000
+          CidrIp: 157.140.121.86/32
+      Tags: 
+        - Key: Name 
+          Value: !Sub ${EnvironmentName}-staging-sg
+      GroupName: !Sub ${EnvironmentName}-staging-sg
+    

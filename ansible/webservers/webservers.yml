@@ -1,0 +1,62 @@
+--- # Bootstrap
+- hosts: webservers
+  become: yes
+  tasks: 
+  - name: Add the user 'deploy'
+    user:
+      name: deploy
+      comment: deploy
+      password: $6$yRX5t8Tefqm9$ltCQ9Vf5wcLI/ecbl82soq68xGldjcaEC5IJsT.PvQ/LFPDcevH1eheeRHowSPehWfFNCoSQCtYRUykjPViPf1
+  - name: Allow password authentication in sshd_config
+    lineinfile:
+      path: /etc/ssh/sshd_config
+      regexp: '^PasswordAuthentication no$'
+      line: PasswordAuthentication yes
+    notify: 
+    - restart sshd
+  - name: Install unzip
+    yum:
+      name: unzip
+      state: latest
+  - name: Install docker
+    yum:
+      name: docker
+      state: latest
+  - name: Start and enable docker service
+    service:
+      name: docker
+      state: started
+      enabled: yes
+  - name: Install epel-release
+    yum:
+      name: epel-release
+      state: latest
+  - name: Install nodejs
+    yum:
+      name: nodejs
+      state: latest
+  - name: sudo without password for deploy user
+    copy:
+      content: 'deploy ALL=(ALL) NOPASSWD:ALL'
+      dest: /etc/sudoers.d/10-deploy
+      mode: 0400
+  - name: Create /etc/systemd/system/train-schedule.service
+    copy: 
+      src: ./train-schedule.service
+      dest: /etc/systemd/system/train-schedule.service
+      owner: root
+      group: root
+      mode: '0644'
+  - name: Create /opt/train-schedule
+    file: 
+      path: /opt/train-schedule
+      owner: deploy
+      group: deploy
+      state: directory
+  handlers:
+    - name: Restart sshd
+      service:
+        name: sshd
+        state: restarted
+      listen: "restart sshd"
+  

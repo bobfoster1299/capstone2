@@ -1,0 +1,87 @@
+Description:
+  Robert Foster
+  Udacity / Capstone
+  Jenkins
+
+Parameters:
+  EnvironmentName:
+    Description: An environment name that will be prefixed to resources
+    Type: String
+
+Resources:
+
+  EC2Jenkins: 
+    Type: AWS::EC2::Instance
+    Properties: 
+      ImageId: "ami-01ed306a12b7d1c96"
+      InstanceType: "t2.small"
+      Tags:
+        - Key: Name
+          Value : !Sub ${EnvironmentName}-jenkins
+      KeyName: "capstone-keypair"
+      NetworkInterfaces: 
+        - AssociatePublicIpAddress: "true"
+          DeviceIndex: "0"
+          GroupSet: 
+          - Ref: JenkinsSecGroup
+          SubnetId: 
+            Fn::ImportValue: !Sub ${EnvironmentName}-publicsubnet1-id
+      UserData: 
+        Fn::Base64:
+          !Sub |
+            #!/bin/bash
+            yum install wget git -y
+            wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo
+            rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
+            yum install jenkins java -y
+            systemctl enable jenkins
+            systemctl start jenkins
+
+  JenkinsSecGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties: 
+      GroupDescription: Allow access to jenkins
+      VpcId:
+        Fn::ImportValue:
+          !Sub ${EnvironmentName}-vpc-id
+      SecurityGroupIngress:
+        - IpProtocol: -1
+          FromPort: -1
+          ToPort: -1
+          CidrIp: 10.4.0.0/24
+        - IpProtocol: tcp
+          FromPort: 8080
+          ToPort: 8080
+          CidrIp: 146.199.83.97/32
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 146.199.83.97/32
+        - IpProtocol: tcp
+          FromPort: 8080
+          ToPort: 8080
+          CidrIp: 157.140.121.86/32
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 157.140.121.86/32
+        # GitHub webhook IPs
+        - IpProtocol: tcp
+          FromPort: 8080
+          ToPort: 8080
+          CidrIp: 192.30.252.0/22
+        - IpProtocol: tcp
+          FromPort: 8080
+          ToPort: 8080
+          CidrIp: 185.199.108.0/22
+        - IpProtocol: tcp
+          FromPort: 8080
+          ToPort: 8080
+          CidrIp: 140.82.112.0/20
+      Tags: 
+        - Key: Name 
+          Value: !Sub ${EnvironmentName}-jenkins-sg
+      GroupName: !Sub ${EnvironmentName}-jenkins-sg
+    
+ 
+# ADD OUTPUT OF DNS:8080

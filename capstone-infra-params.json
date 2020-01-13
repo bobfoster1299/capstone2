@@ -1,0 +1,14 @@
+[
+  {
+      "ParameterKey": "EnvironmentName",
+      "ParameterValue": "capstone"
+  },
+  {
+      "ParameterKey": "VpcCIDR",
+      "ParameterValue": "10.4.0.0/16"        
+  },
+  {
+      "ParameterKey": "PublicSubnet1CIDR",
+      "ParameterValue": "10.4.0.0/24"        
+  }
+]

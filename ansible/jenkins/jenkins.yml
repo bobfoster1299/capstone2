@@ -1,0 +1,47 @@
+--- 
+- hosts: jenkins
+  become: yes
+  tasks: 
+
+  - name: install docker
+    yum:
+      name: docker
+      state: latest
+
+  - name: install vim
+    yum:
+      name: vim
+      state: latest
+
+  - name: Start and enable docker service
+    service:
+      name: docker
+      state: started
+      enabled: yes
+
+  - name: Add the group 'docker'
+    group:
+      name: docker
+
+  - name: Add user 'jenkins' to group 'docker'
+    user:
+      name: jenkins
+      groups: docker
+      append: yes
+    notify: 
+    - restart jenkins
+    - restart docker
+
+  handlers:
+
+    - name: restart jenkins
+      service:
+        name: jenkins
+        state: restarted
+      listen: "restart jenkins"
+      
+    - name: restart docker
+      service:
+        name: docker
+        state: restarted
+      listen: "restart docker"
