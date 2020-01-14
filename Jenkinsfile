@@ -30,5 +30,18 @@ pipeline {
         }
       }
     }
+    stage('Deploy to Production') {
+      when {
+        branch 'master'
+      }
+      steps {
+        input 'Deploy to production???'
+        kubernetesDeploy(
+          kubeconfigId: 'kubeconfig',
+          configs: 'capstone-kube.yml',
+          enableConfigSubstitution: true
+        )
+      }
+    }
   }
 }
