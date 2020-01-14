@@ -55,7 +55,7 @@ Resources:
             yum install -y kubelet kubeadm kubectl
             systemctl enable kubelet
             echo '1' > /proc/sys/net/bridge/bridge-nf-call-iptables
-            kubeadm --ignore-preflight-errors=all init --pod-network-cidr=10.244.0.0/16
+            kubeadm --ignore-preflight-errors=all init
             mkdir -p $HOME/.kube
             sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
             sudo chown $(id -u):$(id -g) $HOME/.kube/config
@@ -168,6 +168,14 @@ Resources:
         - IpProtocol: tcp
           FromPort: 22
           ToPort: 22
+          CidrIp: 157.140.121.86/32
+        - IpProtocol: tcp
+          FromPort: 8080
+          ToPort: 8080
+          CidrIp: 146.199.83.97/32
+        - IpProtocol: tcp
+          FromPort: 8080
+          ToPort: 8080
           CidrIp: 157.140.121.86/32
         - IpProtocol: -1
           FromPort: -1
