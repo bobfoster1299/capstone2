@@ -14,7 +14,7 @@ Resources:
     Type: AWS::EC2::Instance
     Properties: 
       ImageId: "ami-01ed306a12b7d1c96"
-      InstanceType: "t2.micro"
+      InstanceType: "t2.small"
       Tags:
         - Key: Name
           Value : !Sub ${EnvironmentName}-k8s-1
@@ -55,7 +55,7 @@ Resources:
             yum install -y kubelet kubeadm kubectl
             systemctl enable kubelet
             echo '1' > /proc/sys/net/bridge/bridge-nf-call-iptables
-            kubeadm --ignore-preflight-errors=all init
+            kubeadm --ignore-preflight-errors=all init --pod-network-cidr=10.244.0.0/16
             mkdir -p $HOME/.kube
             sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
             sudo chown $(id -u):$(id -g) $HOME/.kube/config
@@ -65,7 +65,7 @@ Resources:
     Type: AWS::EC2::Instance
     Properties: 
       ImageId: "ami-01ed306a12b7d1c96"
-      InstanceType: "t2.micro"
+      InstanceType: "t2.small"
       Tags:
         - Key: Name
           Value : !Sub ${EnvironmentName}-k8s-2
@@ -111,7 +111,7 @@ Resources:
     Type: AWS::EC2::Instance
     Properties: 
       ImageId: "ami-01ed306a12b7d1c96"
-      InstanceType: "t2.micro"
+      InstanceType: "t2.small"
       Tags:
         - Key: Name
           Value : !Sub ${EnvironmentName}-k8s-3
