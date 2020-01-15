@@ -1,24 +1,10 @@
 pipeline {
   agent any
   environment {
-    DOCKER_STAGING_IMAGE_NAME = "bobfoster1299/capstone2-staging"
     DOCKER_IMAGE_NAME = "bobfoster1299/capstone2"
   }
   stages {
-    stage('Build Docker Staging Image') {
-      when {
-        branch 'staging'
-      }
-      steps {
-        script {
-          app = docker.build(DOCKER_STAGING_IMAGE_NAME)
-          app.inside {
-            sh 'echo $(curl localhost:80)'
-          }
-        }
-      }
-    }
-    stage('Build Docker Production Image') {
+    stage('Build Docker Image') {
       when {
         branch 'master'
       }
@@ -44,20 +30,7 @@ pipeline {
         }
       }
     }
-    stage('Deploy to Staging') {
-      when {
-        branch 'staging'
-      }
-      steps {
-        input 'Deploy to staging???'
-        kubernetesDeploy(
-          kubeconfigId: 'kubeconfig',
-          configs: 'capstone-staging-kube.yml',
-          enableConfigSubstitution: true
-        )
-      }
-    }
-    stage('Deploy to Production') {
+    stage('Deploy to Kubernetes') {
       when {
         branch 'master'
       }
