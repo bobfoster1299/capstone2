@@ -34,6 +34,6 @@ spec:
     spec:
       containers:
       - name: capstone-staging
-        image: $DOCKER_IMAGE_NAME:$BUILD_NUMBER
+        image: $DOCKER_STAGING_IMAGE_NAME:$BUILD_NUMBER
         ports:
         - containerPort: 80
