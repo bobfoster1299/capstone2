@@ -9,6 +9,7 @@ spec:
   ports:
   - protocol: TCP
     port: 8080 # from inside the cluster use the DNS name 'capstone-service' on port 8080
+    targetPort: 8080
     nodePort: 30001 # from outside the cluster hit any node on this port to acess
   selector:
     app: capstone
