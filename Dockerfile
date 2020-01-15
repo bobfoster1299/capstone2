@@ -1,5 +1,5 @@
 FROM httpd:latest
 WORKDIR /usr/local/apache2/htdocs/
 COPY ./public-html/* .
-EXPOSE 8080
+EXPOSE 80
 

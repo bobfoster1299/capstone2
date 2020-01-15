@@ -8,8 +8,8 @@ spec:
   type: NodePort
   ports:
   - protocol: TCP
-    port: 8080 # from inside the cluster use the DNS name 'capstone-service' on port 8080
-    targetPort: 8080
+    port: 80 # from inside the cluster use the DNS name 'capstone-service' on port 8080
+    targetPort: 80
     nodePort: 30001 # from outside the cluster hit any node on this port to acess
   selector:
     app: capstone
@@ -36,4 +36,4 @@ spec:
       - name: capstone
         image: $DOCKER_IMAGE_NAME:$BUILD_NUMBER
         ports:
-        - containerPort: 8080
+        - containerPort: 80
