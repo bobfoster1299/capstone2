@@ -1,10 +1,22 @@
 pipeline {
   agent any
   environment {
+    DOCKER_STAGING_IMAGE_NAME = "bobfoster1299/capstone2-staging"
     DOCKER_IMAGE_NAME = "bobfoster1299/capstone2"
   }
   stages {
     stage('Build Docker Image') {
+      when {
+        branch 'staging'
+      }
+      steps {
+        script {
+          app = docker.build(DOCKER_STAGING_IMAGE_NAME)
+          app.inside {
+            sh 'echo $(curl localhost:80)'
+          }
+        }
+      }
       when {
         branch 'master'
       }
@@ -12,10 +24,10 @@ pipeline {
         script {
           app = docker.build(DOCKER_IMAGE_NAME)
           app.inside {
-            sh 'echo $(curl localhost:8080)'
+            sh 'echo $(curl localhost:80)'
           }
         }
-      }
+      }     
     }
     stage('Push Docker Image') {
       when {
