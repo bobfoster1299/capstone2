@@ -5,7 +5,7 @@ pipeline {
     DOCKER_IMAGE_NAME = "bobfoster1299/capstone2"
   }
   stages {
-    stage('Build Docker Image') {
+    stage('Build Docker Staging Image') {
       when {
         branch 'staging'
       }
@@ -17,6 +17,8 @@ pipeline {
           }
         }
       }
+    }
+    stage('Build Docker Production Image') {
       when {
         branch 'master'
       }
