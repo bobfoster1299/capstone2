@@ -30,6 +30,19 @@ pipeline {
         }
       }
     }
+    stage('Deploy to Staging') {
+      when {
+        branch 'staging'
+      }
+      steps {
+        input 'Deploy to staging???'
+        kubernetesDeploy(
+          kubeconfigId: 'kubeconfig',
+          configs: 'capstone-staging-kube.yml',
+          enableConfigSubstitution: true
+        )
+      }
+    }
     stage('Deploy to Production') {
       when {
         branch 'master'
