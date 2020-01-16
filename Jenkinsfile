@@ -2,7 +2,7 @@ pipeline {
   agent any
   environment {
     DOCKER_IMAGE_NAME = "bobfoster1299/capstone2-${BRANCH_NAME}"
-    NODE_PORT = '30020'
+    #NODE_PORT = '30020'
   }
   stages {
     stage('Check env variable') {
