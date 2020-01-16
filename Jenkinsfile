@@ -34,10 +34,10 @@ pipeline {
       steps {
         script {
           if (env.BRANCH_NAME == 'master') {
-            NODE_PORT = '30001'
+            env.NODE_PORT = '30001'
           }
           else {
-            NODE_PORT = '30002'
+            env.NODE_PORT = '30002'
           }
         }
         input "Deploy to ${BRANCH_NAME}???"
