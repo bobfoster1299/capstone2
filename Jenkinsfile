@@ -1,3 +1,11 @@
+script {             
+  if (BRANCH_NAME == 'master') {
+    NODE_PORT = 30001
+  } else {
+    NODE_PORT = 30002
+  }
+}
+
 pipeline {
   agent any
   environment {
@@ -32,12 +40,6 @@ pipeline {
     stage('Deploy to Kubernetes') {
       steps {
         script {
-          if (BRANCH_NAME == 'master') {
-            NODE_PORT = 30001
-          } else {
-            NODE_PORT = 30002
-          }
-        }
         input "Deploy to ${BRANCH_NAME}???"
         kubernetesDeploy(
           kubeconfigId: 'kubeconfig',
