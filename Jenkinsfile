@@ -32,14 +32,14 @@ pipeline {
     stage('Deploy to Kubernetes') {
       steps {
         script {
-          if (env.BRANCH_NAME == 'master') {
+          if (env.BRANCH_NAME == 'production') {
             env.NODE_PORT = '30001'
           }
-          else {
+          else if (env.BRANCH_NAME == 'staging') {
             env.NODE_PORT = '30002'
           }
         }
-        input "Deploy to ${BRANCH_NAME}???"
+        input "Deploy to ${BRANCH_NAME}?"
         kubernetesDeploy(
           kubeconfigId: 'kubeconfig',
           configs: 'capstone-kube.yml',
