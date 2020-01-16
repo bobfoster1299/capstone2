@@ -23,10 +23,16 @@ metadata:
   labels:
     app: capstone-$BRANCH_NAME
 spec:
-  replicas: 2
+  replicas: 8
   selector:
     matchLabels:
       app: capstone-$BRANCH_NAME
+  minReadySeconds: 10
+  strategy: 
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
   template:
     metadata:
       labels:
