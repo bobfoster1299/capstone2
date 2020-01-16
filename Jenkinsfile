@@ -2,7 +2,7 @@ pipeline {
   agent any
   environment {
     DOCKER_IMAGE_NAME = "bobfoster1299/capstone2-${BRANCH_NAME}"
-    NODE_PORT='30020'
+    NODE_PORT = '30020'
   }
   stages {
     stage('Check env variable') {
@@ -32,14 +32,6 @@ pipeline {
     }
     stage('Deploy to Kubernetes') {
       steps {
-        script {
-          if (env.BRANCH_NAME == 'master') {
-            NODE_PORT = '30001'
-          }
-          else {
-            NODE_PORT = '30002'
-          }
-        }
         input "Deploy to ${BRANCH_NAME}???"
         kubernetesDeploy(
           kubeconfigId: 'kubeconfig',
