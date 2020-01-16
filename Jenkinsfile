@@ -5,11 +5,10 @@ pipeline {
   }
   stages {
     stage('Check env variable') {
-        steps {
-          echo "${BRANCH_NAME}"
-        }
-      }     
-    }
+      steps {
+        echo "${BRANCH_NAME}"
+      }
+    }     
     stage('Build Docker Image') {
       when {
         branch 'master'
