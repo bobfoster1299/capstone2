@@ -1,7 +1,7 @@
 pipeline {
   agent any
   environment {
-    DOCKER_IMAGE_NAME = "bobfoster1299/capstone2-${BRANCH-NAME}"
+    DOCKER_IMAGE_NAME = "bobfoster1299/capstone2-${BRANCH_NAME}"
   }
   stages {
     stage('Check env variable') {
