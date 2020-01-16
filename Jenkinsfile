@@ -14,7 +14,7 @@ pipeline {
         script {
           app = docker.build(DOCKER_IMAGE_NAME)
           app.inside {
-            sh 'echo $(curl localhost:80)'
+            sh 'echo $(curl localhost:808)'
           }
         }
       }     
