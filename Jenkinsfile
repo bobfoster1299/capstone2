@@ -1,12 +1,3 @@
-script {     
-  NODE_PORT = 30009        
-  if (BRANCH_NAME == 'master') {
-    NODE_PORT = 30001
-  } else {
-    NODE_PORT = 30002
-  }
-}
-
 pipeline {
   agent any
   environment {
