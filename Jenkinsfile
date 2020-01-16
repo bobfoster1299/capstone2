@@ -1,7 +1,7 @@
 pipeline {
   agent any
   environment {
-    DOCKER_IMAGE_NAME = "bobfoster1299/capstone2"
+    DOCKER_IMAGE_NAME = "bobfoster1299/capstone2-${BRANCH-NAME}"
   }
   stages {
     stage('Check env variable') {
@@ -10,9 +10,9 @@ pipeline {
       }
     }     
     stage('Build Docker Image') {
-      when {
-        branch 'master'
-      }
+      #when {
+      #  branch 'master'
+      #}
       steps {
         script {
           app = docker.build(DOCKER_IMAGE_NAME)
