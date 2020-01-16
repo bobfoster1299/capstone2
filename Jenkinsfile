@@ -4,11 +4,6 @@ pipeline {
     DOCKER_IMAGE_NAME = "bobfoster1299/capstone2-${BRANCH_NAME}"
   }
   stages {
-    stage('Check env variable') {
-      steps {
-        echo "${BRANCH_NAME}"
-      }
-    }     
     stage('Build Docker Image') {
       steps {
         script {
