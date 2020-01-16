@@ -1,10 +1,5 @@
 pipeline {
   agent any
-  if (env.BRANCH_NAME == 'master') {
-    NODE_PORT = '30001'
-  } else {
-    NODE_PORT = '30002'
-  }
   environment {
     DOCKER_IMAGE_NAME = "bobfoster1299/capstone2-${BRANCH_NAME}"
   }
@@ -35,6 +30,11 @@ pipeline {
       }
     }
     stage('Deploy to Kubernetes') {
+      if (env.BRANCH_NAME == 'master') {
+        NODE_PORT = '30001'
+      } else {
+        NODE_PORT = '30002'
+      }
       steps {
         input "Deploy to ${BRANCH_NAME}???"
         kubernetesDeploy(
