@@ -183,11 +183,11 @@ Resources:
           CidrIp: 10.4.0.0/24
         - IpProtocol: tcp
           FromPort: 30001
-          ToPort: 30001
+          ToPort: 30020
           CidrIp: 146.199.83.97/32
         - IpProtocol: tcp
           FromPort: 30001
-          ToPort: 30001
+          ToPort: 300020
           CidrIp: 157.140.121.86/32
       Tags: 
         - Key: Name 
