@@ -39,7 +39,6 @@ pipeline {
     }
     stage('Deploy to Kubernetes') {
       steps {
-        script {
         input "Deploy to ${BRANCH_NAME}???"
         kubernetesDeploy(
           kubeconfigId: 'kubeconfig',
