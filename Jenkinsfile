@@ -14,7 +14,7 @@ pipeline {
         script {
           app = docker.build(DOCKER_IMAGE_NAME)
           app.inside {
-            sh 'echo $(cat /usr/local/apache2/htdocs/index.html)'
+            sh 'echo $(curl localhost:80)'
           }
         }
       }     
