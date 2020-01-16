@@ -10,8 +10,7 @@ spec:
   - protocol: TCP
     port: 80 # from inside the cluster use the DNS name 'capstone-service' on port 8080
     targetPort: 80 # This is the port on the pod that the request gets sent to
-    #nodePort: $NODE_PORT # from outside the cluster hit any node on this port to acess
-    nodePort: '30003'
+    nodePort: $NODE_PORT # from outside the cluster hit any node on this port to access
   selector:
     app: capstone-$BRANCH_NAME
 

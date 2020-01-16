@@ -2,6 +2,14 @@ pipeline {
   agent any
   environment {
     DOCKER_IMAGE_NAME = "bobfoster1299/capstone2-${BRANCH_NAME}"
+    script {
+      if (BRANCH_NAME == 'master') {
+        NODE_PORT = '30001'
+      }
+      else {
+        NODE_PORT = '30002'
+      }
+    }
   }
   stages {
     stage('Check env variable') {
