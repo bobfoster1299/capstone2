@@ -32,7 +32,7 @@ pipeline {
     stage('Deploy to Kubernetes') {
       steps {
         script {
-          if (env.BRANCH_NAME == 'master') {
+          if (BRANCH_NAME == 'master') {
             NODE_PORT = 30001
           } else {
             NODE_PORT = 30002
