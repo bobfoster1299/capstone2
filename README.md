@@ -49,27 +49,15 @@ The configuration is now complete. Every time you push code to git you can go in
 
 **cloudformation/delete.sh** - delete AWS stack.
 
-**cloudformation/capstone-infra.yml** - AWS CloudFormation script to deploy:
-- VPC
-- Internet gateway
-- Internet gateway attachment
-- Public subnet
-- Public route table
-- Default public route
-- Public subnet route table association
+**cloudformation/capstone-infra.yml** - cloudformation script to deploy network infrastructure in AWS.
 
-**capstone-k8s-cluster.yml** - AWS CloudFormation script to deploy:
-- 1 x EC2 instance - kubernetes master
-- 2 x EC2 instance - kubernetes worker nodes
-- Security group
+**capstone-k8s-cluster.yml** - cloudformation script to deploy kubernetes cluster in AWS.
 
-**cloudformation/capstone-jenkins.yml** - AWS CloudFormation script to deploy:
-- EC2 instance with jenkins installed (installation must be finished off manually via the browser)
-- Security group
+**cloudformation/capstone-jenkins.yml** - cloudformation script to deploy a jenkins server in AWS.
 
-**ansible/jenkins/** - ansible playbook to further configure the jenkins node. Must be executed manually once the node is running.
+**ansible/jenkins/** - ansible playbook to further configure the jenkins server. Must be executed manually once the node is running.
 
-**Dockerfile** - creates docker container running Apache for hosting website.
+**Dockerfile** - creates docker image running Apache for hosting website.
 
 **Jenkinsfile** - creates jenkins pipeline for deploying to staging and production.
 
