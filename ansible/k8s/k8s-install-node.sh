@@ -1,4 +1,6 @@
 #!/bin/bash
+# Run this on all nodes to install k8s
+# For the master, after this run the k8s-install-master.sh
 setenforce 0
 sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
 modprobe br_netfilter
@@ -24,8 +26,3 @@ EOF
 yum install -y kubelet kubeadm kubectl
 systemctl enable kubelet
 echo '1' > /proc/sys/net/bridge/bridge-nf-call-iptables
-kubeadm --ignore-preflight-errors=all init
-mkdir -p $HOME/.kube
-sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-sudo chown $(id -u):$(id -g) $HOME/.kube/config
-kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
