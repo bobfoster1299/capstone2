@@ -1,5 +1,6 @@
 pipeline {
-  agent any
+  BROKEN!
+  #agent any
   environment {
     DOCKER_IMAGE_NAME = "bobfoster1299/capstone2-${BRANCH_NAME}"
   }
