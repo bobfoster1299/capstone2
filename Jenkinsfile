@@ -4,6 +4,13 @@ pipeline {
     DOCKER_IMAGE_NAME = "bobfoster1299/capstone2-${BRANCH_NAME}"
   }
   stages {
+    stage('Lint HTML') {
+      steps {
+        script {
+          sh 'tidy -q -e public-html/*.html'
+        }
+      }     
+    }
     stage('Build Docker Image') {
       steps {
         script {
