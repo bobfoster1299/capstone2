@@ -3,6 +3,16 @@
   become: yes
   tasks: 
 
+  - name: install epel-release
+    yum:
+      name: epel-release
+      state: latest
+
+  - name: install tidy
+    yum:
+      name: tidy
+      state: latest
+
   - name: install sshpass
     yum:
       name: sshpass
