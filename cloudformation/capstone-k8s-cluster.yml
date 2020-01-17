@@ -56,10 +56,11 @@ Resources:
             systemctl enable kubelet
             echo '1' > /proc/sys/net/bridge/bridge-nf-call-iptables
             kubeadm --ignore-preflight-errors=all init --pod-network-cidr=10.244.0.0/16
-            mkdir -p $HOME/.kube
-            sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-            sudo chown $(id -u):$(id -g) $HOME/.kube/config
+            mkdir -p /root/.kube
+            cp -i /etc/kubernetes/admin.conf /root/.kube/config
+            qchown root:root /root/.kube/config
             kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+
 
   EC2K8s2: 
     Type: AWS::EC2::Instance
