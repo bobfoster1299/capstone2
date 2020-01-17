@@ -4,9 +4,10 @@ By Rob Foster 17/01/2020
 This project does the following:
 - Creates network infrastructure in AWS
 - Builds a three-node kubernetes cluster on EC2 instances
-- Builds a Jenkins server on an EC2 instance
-- Creates a CI/CD pipeline in Jenkins with staging and production branches
-- Builds a docker container and deploys it to kubernetes
+- Builds a jenkins server on an EC2 instance
+- Creates a CI/CD pipeline in jenkins with staging and production branches
+- Builds a docker image and pushes it to Docker Hub
+- Deploys containers to kubernetes
 
 # Instructions
 These are the basic steps for building the environment:
@@ -21,20 +22,20 @@ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Docu
 kubeadm token create --print-join-command
 ```
 - SSH into the two kubernetes worker nodes and run the join command to join them to the cluster
-- Run the CloudFormation capstone-jenkins script to the build the Jenkins server
-- Run the ansible jenkins script against the Jenkins server
-- Connect to the Jenkins server via the browser and complete the install via the GUI
+- Run the CloudFormation capstone-jenkins script to the build the jenkins server
+- Run the ansible jenkins script against the jenkins server
+- Connect to the jenkins server via the browser and complete the install via the GUI
 - Install the Blue Ocean plugins and the Kubernetes Continuous Deploy plugins
 - In your GitHub repo create a personal access token
-- In Jenkins add a username/password credential to connect to GitHub:
+- In jenkins add a username/password credential to connect to GitHub:
   - Username: your GitHub account name  
   - Password: the personal access token generated above
   - ID: github_key
-- In Jenkins add a username/password credential to connect to Docker Hub:
+- In jenkins add a username/password credential to connect to Docker Hub:
   - Username: your docker username
   - Password: your docker password
   - ID: docker_hub_login
-- In Jenkins add a Kubernetes configuration (kubeconfig) credential to connect to kubernetes:
+- In jenkins add a 'Kubernetes configuration (kubeconfig)' credential to connect to kubernetes:
   - ID: kubeconfig
   - Enter directly: the contents of ~/.kube/config from the kubernetes master
 
@@ -63,14 +64,14 @@ The configuration is now complete. Every time you push code to git you can go in
 - Security group
 
 **cloudformation/capstone-jenkins.yml** - AWS CloudFormation script to deploy:
-- EC2 instance with Jenkins installed (installation must be finished off manually via the browser)
+- EC2 instance with jenkins installed (installation must be finished off manually via the browser)
 - Security group
 
 **ansible/jenkins/** - ansible playbook to further configure the jenkins node. Must be executed manually once the node is running.
 
 **Dockerfile** - creates docker container running Apache for hosting website.
 
-**Jenkinsfile** - creates Jenkins pipeline for deploying to staging and production.
+**Jenkinsfile** - creates jenkins pipeline for deploying to staging and production.
 
 **capstone-kube.yml** - creates kubernetes deployment and service.
 
