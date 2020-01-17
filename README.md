@@ -48,16 +48,13 @@ The configuration is now complete. Every time you push code to git you can go in
 
 # Files
 
-**cloudformation/create.sh**    Create new AWS stack
+**cloudformation/create.sh** - create new AWS stack
 
-### cloudformation/update.sh
-Update existing AWS stack
+**cloudformation/update.sh** - update existing AWS stack
 
-### cloudformation/delete.sh
-Delete AWS stack
+**cloudformation/delete.sh** - delete AWS stack
 
-### cloudformation/capstone-infra.yml
-AWS CloudFormation script to deploy:
+**cloudformation/capstone-infra.yml** - AWS CloudFormation script to deploy:
 - VPC
 - Internet gateway
 - Internet gateway attachment
