@@ -50,6 +50,7 @@ The configuration is now complete. Every time you push code to git you can go in
 
 **cloudformation/create.sh**
 
+
 Create new AWS stack
 
 ### cloudformation/update.sh
