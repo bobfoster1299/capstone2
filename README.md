@@ -16,9 +16,13 @@ These are the basic steps for building the environment:
 - Run the CloudFormation capstone-infra script to build the AWS network infrastructure
 - Run the CloudFormation capstone-k8s-cluster script to build the kubernetes cluster
 - SSH into the kubernetes master and run the following to configure the network:
+```
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+```
 - Obtain the join command:
+```
 kubeadm token create --print-join-command
+```
 - SSH into the two kubernetes worker nodes and run the join command to join them to the cluster
 - Run the CloudFormation capstone-jenkins script to the build the Jenkins server
 - Run the ansible jenkins script against the Jenkins server
@@ -26,16 +30,16 @@ kubeadm token create --print-join-command
 - Install the Blue Ocean plugins and the Kubernetes Continuous Deploy plugins
 - In your GitHub repo create a personal access token
 - In Jenkins add a username/password credential to connect to GitHub:
--- Username: your GitHub account name  
--- Password: the personal access token generated above
--- ID: github_key
+  - Username: your GitHub account name  
+  - Password: the personal access token generated above
+  - ID: github_key
 - In Jenkins add a username/password credential to connect to Docker Hub:
--- Username: your docker username
--- Password: your docker password
--- ID: docker_hub_login
+  - Username: your docker username
+  - Password: your docker password
+  - ID: docker_hub_login
 - In Jenkins add a Kubernetes configuration (kubeconfig) credential to connect to kubernetes:
--- ID: kubeconfig
--- Enter directly: the contents of ~/.kube/config from the kubernetes master
+  - ID: kubeconfig
+  - Enter directly: the contents of ~/.kube/config from the kubernetes master
 
 The configuration is now complete. Every time you push code to git you can go into jenkins and click Build Now to trigger a new build and deploy to kubernetes.
 
