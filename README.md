@@ -1,9 +1,7 @@
-By Rob Foster 13/01/2020
+By Rob Foster 17/01/2020
 
 # Introduction
-
 This project does the following:
-
 - Creates network infrastructure in AWS
 - Builds a three-node kubernetes cluster on EC2 instances
 - Builds a Jenkins server on an EC2 instance
@@ -12,7 +10,6 @@ This project does the following:
 
 # Instructions
 These are the basic steps for building the environment:
-
 - Run the CloudFormation capstone-infra script to build the AWS network infrastructure
 - Run the CloudFormation capstone-k8s-cluster script to build the kubernetes cluster
 - SSH into the kubernetes master and run the following to configure the network:
@@ -43,16 +40,13 @@ kubeadm token create --print-join-command
 
 The configuration is now complete. Every time you push code to git you can go into jenkins and click Build Now to trigger a new build and deploy to kubernetes.
 
-
-
-
 # Files
 
-**cloudformation/create.sh** - create new AWS stack
+**cloudformation/create.sh** - create new AWS stack.
 
-**cloudformation/update.sh** - update existing AWS stack
+**cloudformation/update.sh** - update existing AWS stack.
 
-**cloudformation/delete.sh** - delete AWS stack
+**cloudformation/delete.sh** - delete AWS stack.
 
 **cloudformation/capstone-infra.yml** - AWS CloudFormation script to deploy:
 - VPC
@@ -63,29 +57,22 @@ The configuration is now complete. Every time you push code to git you can go in
 - Default public route
 - Public subnet route table association
 
-### capstone-k8s-cluster.yml
-AWS CloudFormation script to deploy:
+**capstone-k8s-cluster.yml** - AWS CloudFormation script to deploy:
 - 1 x EC2 instance - kubernetes master
 - 2 x EC2 instance - kubernetes worker nodes
 - Security group
 
-### cloudformation/capstone-jenkins.yml
-AWS CloudFormation script to deploy:
+**cloudformation/capstone-jenkins.yml** - AWS CloudFormation script to deploy:
 - EC2 instance with Jenkins installed (installation must be finished off manually via the browser)
 - Security group
 
-### ansible/jenkins/*
-Ansible playbook to further configure the jenkins node. Must be executed manually once the node is running.
+**ansible/jenkins/** - ansible playbook to further configure the jenkins node. Must be executed manually once the node is running.
 
-### Dockerfile
-Creates docker container running Apache for hosting website
+**Dockerfile** - creates docker container running Apache for hosting website.
 
-### Jenkinsfile
-Creates Jenkins pipeline for deploying to staging and production
+**Jenkinsfile** - creates Jenkins pipeline for deploying to staging and production.
 
-### capstone-kube.yml
-Creates kubernetes deployment and service
+**capstone-kube.yml** - creates kubernetes deployment and service.
 
-### public-html/*
-HTML files for website
+**public-html/*** - HTML files for website.
 
