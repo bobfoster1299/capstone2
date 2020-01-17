@@ -11,6 +11,9 @@ Update existing AWS stack
 ### delete.sh
 Delete AWS stack
 
+### public-html
+HTML files for website
+
 ## Infrastructure
 
 ### capstone-infra.yml
@@ -33,21 +36,18 @@ AWS CloudFormation script to deploy:
 ### ansible/jenkins/*
 Ansible playbook to further configure the jenkins node. Must be executed manually once the node is running.
 
-## Kubernetes
+## Docker
+### Dockerfile
+Creates docker container running Apache for hosting website
 
-### capstone-k8s.yml
+## Kubernetes
+### capstone-kube.yml
+Creates kubernetes deployment and service
+
+### capstone-k8s-cluster.yml
 AWS CloudFormation script to deploy:
 - 1 x EC2 instance - kubernetes master
-- 2 x EC2 instance - kubernetes worker nodes (after building you need to login to the nodes and execute the kubenetes join command)
+- 2 x EC2 instance - kubernetes worker nodes
 - Security group
 
-## Staging / Production
-Currently the apps are deployed directly to the staging/production nodes. They don't run in containers.
 
-### capstone-staging/production.yml 
-AWS CloudFormation script to deploy:
-- EC2 instance
-- Security group
-
-### ansible/webservers/*
-Ansible playbook to configure the staging node. Must be executed manually once the node is running.
