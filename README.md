@@ -2,12 +2,12 @@ By Rob Foster 18/01/2020
 
 # Introduction
 This project does the following:
-- Creates network infrastructure in AWS
-- Builds a three-node kubernetes cluster on EC2 instances
-- Builds a jenkins server on an EC2 instance
-- Creates a CI/CD pipeline in jenkins with staging and production branches
-- Builds a docker image containing apache website and pushes it to Docker Hub
-- Deploys the docker containers to kubernetes using rolling deployment
+- Creates network infrastructure in AWS.
+- Builds a three-node kubernetes cluster on EC2 instances.
+- Builds a jenkins server on an EC2 instance.
+- Creates a CI/CD pipeline in jenkins with staging and production branches.
+- Builds a docker image containing apache website and pushes it to Docker Hub.
+- Deploys the docker containers to kubernetes using rolling deployment.
 
 # Instructions
 These are the basic steps for building the environment:
@@ -36,11 +36,11 @@ kubeadm token create --print-join-command
 ```
 ansible-playbook -i inv -u centos --private-key ~/yourkey.pem jenkins.yml
 ```
-- Connect to the jenkins server via the browser and complete the install via the GUI
-- Install the Blue Ocean plugins and the Kubernetes Continuous Deploy plugins
-- In your GitHub repo create a personal access token
+- Connect to the jenkins server via the browser and complete the install via the GUI.
+- Install the Blue Ocean plugins and the Kubernetes Continuous Deploy plugins.
+- In your GitHub repo create a personal access token.
 - In jenkins add a username/password credential to connect to GitHub:
-  - Username: your GitHub account name  
+  - Username: your GitHub account name
   - Password: the personal access token generated above
   - ID: github_key
 - In jenkins add a username/password credential to connect to Docker Hub:
