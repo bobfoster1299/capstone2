@@ -51,13 +51,13 @@ The configuration is now complete. Every time you push code to git you can go in
 
 **cloudformation/capstone-infra.yml** - cloudformation script to deploy network infrastructure in AWS.
 
-**capstone-k8s-cluster.yml** - cloudformation script to deploy kubernetes cluster in AWS.
+**cloudformation/capstone-k8s-cluster.yml** - cloudformation script to deploy kubernetes cluster in AWS.
 
 **cloudformation/capstone-jenkins.yml** - cloudformation script to deploy a jenkins server in AWS.
 
 **ansible/jenkins/** - ansible playbook to further configure the jenkins server. Must be executed manually once the node is running.
 
-**Dockerfile** - creates docker image running Apache for hosting website.
+**Dockerfile** - creates docker image running apache for hosting website.
 
 **Jenkinsfile** - creates jenkins pipeline for deploying to staging and production.
 
