@@ -1,4 +1,4 @@
-By Rob Foster 17/01/2020
+By Rob Foster 18/01/2020
 
 # Introduction
 This project does the following:
@@ -6,13 +6,19 @@ This project does the following:
 - Builds a three-node kubernetes cluster on EC2 instances
 - Builds a jenkins server on an EC2 instance
 - Creates a CI/CD pipeline in jenkins with staging and production branches
-- Builds a docker image and pushes it to Docker Hub
-- Deploys containers to kubernetes
+- Builds a docker image containing apache website and pushes it to Docker Hub
+- Deploys the docker containers to kubernetes using rolling deployment
 
 # Instructions
 These are the basic steps for building the environment:
-- Run the CloudFormation capstone-infra script to build the AWS network infrastructure
-- Run the CloudFormation capstone-k8s-cluster script to build the kubernetes cluster
+- Run the CloudFormation capstone-infra script to build the AWS network infrastructure:
+```
+./create.sh capstone-infra capstone-infra.yml capstone-infra.json
+```
+- Run the CloudFormation capstone-k8s-cluster script to build the kubernetes cluster:
+```
+./create.sh capstone-k8s-cluster capstone-k8s-cluster.yml capstone-k8s-cluster.json
+```
 - SSH into the kubernetes master and run the following to configure the network:
 ```
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
@@ -22,8 +28,14 @@ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Docu
 kubeadm token create --print-join-command
 ```
 - SSH into the two kubernetes worker nodes and run the join command to join them to the cluster
-- Run the CloudFormation capstone-jenkins script to the build the jenkins server
-- Run the ansible jenkins script against the jenkins server
+- Run the CloudFormation capstone-jenkins script to the build the jenkins server:
+```
+./create.sh capstone-jenkins capstone-jenkins.yml capstone-jenkins.json
+```
+- Run the ansible jenkins script against the jenkins server:
+```
+ansible-playbook -i inv -u centos --private-key ~/yourkey.pem jenkins.yml
+```
 - Connect to the jenkins server via the browser and complete the install via the GUI
 - Install the Blue Ocean plugins and the Kubernetes Continuous Deploy plugins
 - In your GitHub repo create a personal access token
@@ -39,7 +51,7 @@ kubeadm token create --print-join-command
   - ID: kubeconfig
   - Enter directly: the contents of ~/.kube/config from the kubernetes master
 
-The configuration is now complete. Every time you push code to git you can go into jenkins and click Build Now to trigger a new build and deploy to kubernetes.
+The configuration is now complete. Every time you push code to git you can go into jenkins and click Build Now to trigger a new build and deploy to kubernetes. You can deploy to either staging or production, depending on which branch you commit to in github. 
 
 # Files
 
