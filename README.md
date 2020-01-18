@@ -51,7 +51,7 @@ ansible-playbook -i inv -u centos --private-key ~/yourkey.pem jenkins.yml
   - ID: kubeconfig
   - Enter directly: the contents of ~/.kube/config from the kubernetes master
 
-The configuration is now complete. Every time you push code to git you can go into jenkins and click Build Now to trigger a new build and deploy to kubernetes. You can deploy to either staging or production, depending on which branch you commit to in github. 
+The configuration is now complete. Every time you push code to git you can go into jenkins and click Build Now to trigger a new build and deploy to kubernetes. You can deploy to either staging or production, depending on which branch you commit to in GitHub. 
 
 # Files
 
