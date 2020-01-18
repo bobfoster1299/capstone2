@@ -11,11 +11,11 @@ This project does the following:
 
 # Instructions
 These are the basic steps for building the environment:
-- Run the CloudFormation capstone-infra script to build the AWS network infrastructure:
+- Run the cloudformation capstone-infra script to build the AWS network infrastructure:
 ```
 ./create.sh capstone-infra capstone-infra.yml capstone-infra.json
 ```
-- Run the CloudFormation capstone-k8s-cluster script to build the kubernetes cluster:
+- Run the cloudformation capstone-k8s-cluster script to build the kubernetes cluster:
 ```
 ./create.sh capstone-k8s-cluster capstone-k8s-cluster.yml capstone-k8s-cluster.json
 ```
@@ -28,7 +28,7 @@ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Docu
 kubeadm token create --print-join-command
 ```
 - SSH into the two kubernetes worker nodes and run the join command to join them to the cluster
-- Run the CloudFormation capstone-jenkins script to the build the jenkins server:
+- Run the cloudformation capstone-jenkins script to the build the jenkins server:
 ```
 ./create.sh capstone-jenkins capstone-jenkins.yml capstone-jenkins.json
 ```
