@@ -27,8 +27,8 @@ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Docu
 ```
 kubeadm token create --print-join-command
 ```
-- SSH into the two kubernetes worker nodes and run the join command to join them to the cluster
-- Run the cloudformation capstone-jenkins script to the build the jenkins server:
+- SSH into the two kubernetes worker nodes and run the join command to join them to the cluster.
+- Run the cloudformation capstone-jenkins script to build the jenkins server:
 ```
 ./create.sh capstone-jenkins capstone-jenkins.yml capstone-jenkins.json
 ```
