@@ -1,7 +1,11 @@
-By Rob Foster 18/01/2020
+By Rob Foster 
+
+Updated 08/08/2020
 
 # Introduction
-This project does the following:
+This is my capstone project for the Cloud DevOps Engineer nanodegree program from https://udacity.com.
+
+It does the following:
 - Creates network infrastructure in AWS.
 - Builds a three-node kubernetes cluster on EC2 instances.
 - Builds a jenkins server on an EC2 instance.
