@@ -3,7 +3,7 @@ By Rob Foster
 Updated 08/08/2020
 
 # Introduction
-This is my capstone project for the Cloud DevOps Engineer nanodegree program from [udacity.com].
+This is my capstone project for the Cloud DevOps Engineer nanodegree program from [Udacity](https://udacity.com).
 
 It does the following:
 - Creates network infrastructure in AWS.
