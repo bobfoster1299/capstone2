@@ -59,25 +59,25 @@ The configuration is now complete. Every time you push code to git you can go in
 
 # Files
 
-**cloudformation/create.sh** - create new AWS stack.
+[cloudformation/create.sh](cloudformation/create.sh) - create new AWS stack.
 
-**cloudformation/update.sh** - update existing AWS stack.
+[cloudformation/update.sh](cloudformation/update.sh) - update existing AWS stack.
 
-**cloudformation/delete.sh** - delete AWS stack.
+[cloudformation/delete.sh](cloudformation/delete.sh) - delete AWS stack.
 
-**cloudformation/capstone-infra.yml** - cloudformation script to deploy network infrastructure in AWS.
+[cloudformation/capstone-infra.yml](cloudformation/capstone-infra.yml) - cloudformation script to deploy network infrastructure in AWS.
 
-**cloudformation/capstone-k8s-cluster.yml** - cloudformation script to deploy kubernetes cluster in AWS.
+[cloudformation/capstone-k8s-cluster.yml](cloudformation/capstone-k8s-cluster.yml) - cloudformation script to deploy kubernetes cluster in AWS.
 
-**cloudformation/capstone-jenkins.yml** - cloudformation script to deploy a jenkins server in AWS.
+[cloudformation/capstone-jenkins.yml](cloudformation/capstone-jenkins.yml) - cloudformation script to deploy a jenkins server in AWS.
 
-**ansible/jenkins/*** - ansible playbook to further configure the jenkins server. Must be executed manually once the node is running.
+[ansible/jenkins/*](ansible/jenkins) - ansible playbook to further configure the jenkins server. Must be executed manually once the node is running.
 
-**Dockerfile** - creates docker image running apache for hosting website.
+[Dockerfile](Dockerfile) - creates docker image running apache for hosting website.
 
-**Jenkinsfile** - creates jenkins pipeline for deploying to staging and production.
+[Jenkinsfile](Jenkinsfile) - creates jenkins pipeline for deploying to staging and production.
 
-**capstone-kube.yml** - creates kubernetes deployment and service.
+[capstone-kube.yml](capstone-kube.yml) - creates kubernetes deployment and service.
 
-**public-html/*** - HTML files for website.
+[public-html/*](public-html) - HTML files for website.
 
